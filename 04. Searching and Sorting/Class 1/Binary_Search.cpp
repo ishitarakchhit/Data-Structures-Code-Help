@@ -8,7 +8,7 @@ using namespace std;
 int bsearch(int arr[], int size, int key){
 
     int s=0;
-    int e= size;
+    int e= size-1;
     int mid = e+ (s-e)/2;
 
     while(s<=e){
