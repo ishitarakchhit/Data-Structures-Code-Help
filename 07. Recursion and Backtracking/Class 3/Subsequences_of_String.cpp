@@ -15,7 +15,7 @@ void printsub(string str, string output, int i, vector<string> &v){
     printsub(str, output, i+1, v);                          
 }
 int main(){
-    string str="abc";
+    string str="aba";
     string output="";
     vector<string> v;
     printsub(str, output, 0, v);
