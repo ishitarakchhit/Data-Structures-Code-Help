@@ -1,135 +1,216 @@
 #include<iostream>
 using namespace std;
 
-class Node{
+class node{
     public:
     int data;
-    Node* prev;
-    Node* next;
+    node* next;
+    node* prev;
 
-    Node(){
+    node(){
         this->data = 0;
-        this->prev = NULL;
         this->next = NULL;
+        this->prev = NULL;
     }
-
-    Node(int data){
+    node(int data){
         this->data = data;
-        this->prev = NULL;
         this->next = NULL;
+        this->prev = NULL;
+    }
+    ~node(){
+        cout<<"node deleted "<<this->data;
+        cout<<endl;
     }
 };
 
-//function to print the linked list
-void printLL(Node* &head, Node* &tail){
-    Node* temp = head;
-
-    while(temp!= NULL){
-        cout<<temp->data<<" ";
-        temp= temp->next;
-    }
-
-}
 
 
-//to find the length of a linked list
-int findLength(Node* &head){
-    int length=0;
-    Node* temp = head;
+//to find length of a doubly ll
+int findlength(node* head){
+    int length = 0;
+    node* temp = head;
 
     while(temp!= NULL){
         length++;
-        temp = temp-> next;
+        temp = temp->next;
     }
     return length;
 }
 
+//to print a linked list
+void printll(node* &head, node* &tail){
+    node* temp = head;
 
-//to insert the node at head
-void insertAtHead(Node* &head, Node* &tail, int data){
-    Node* newNode = new Node(data);
-    if(head == NULL){
-        head = newNode;
-        tail = head;
-        return;
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp= temp->next;
     }
-
-    newNode->next = head;
-    head->prev = newNode;
-    head = newNode;
+    return;
 }
 
 
-//to insert the node at tail
-void insertAtTail(Node* &head, Node* &tail, int data){
-    Node* newNode = new Node(data);
+//to insert a node in the beginning
+void insertatbeg(node* &head, node* &tail, int data){
+    node* newnode = new node(data);
+ 
     if(head == NULL){
-        head = newNode;
-        tail = newNode;
+        head = tail= newnode;
         return;
     }
-    newNode->prev = tail;
-    tail->next = newNode;
-    tail = newNode;
+    else{
+        head->prev = newnode;
+        newnode->next = head;
+        head = newnode;
+        return;
+    }
 
 }
 
+//to insert a node in the end
+void insertatend(node* &head, node* &tail, int data){
+    
+    node* newnode = new node(data);
+    if(head ==NULL){
+        head = tail = newnode;
+        return;
+    }
+    else{
+        newnode->prev = tail;
+        tail->next = newnode;
+        tail = newnode;
+        return;
+    }
+}
 
-//to insert at any position
-// void insertAtPosition(Node* &head, Node* &tail, int data, int position){
-//     if(head == NULL){
-//         Node* newNode = new Node(data);
-//         head = newNode;
-//         tail = newNode;
-//         return;
-//     }
-
-//     else{
-//         if(position==1){
-//             insertAtHead(head, tail, data);
-//             return;
-//         }
-//         int length = findLength(head);
-
-//         else if(position>length){
-//             insertAtTail(head, tail, data);
-//             return;
-//         }
-//         else {
-//             int i=1;
-//             Node* newNode = new Node(data);
-//             Node* prevNode = head;
-//             while(i<position-1){
-//                 prevNode= prevNode ->next;
-//                 i++;
-//             }
-//             prevNode->next->prev = newNode;
-//             newNode->next = prevNode->next;
-//             prevNode->next = newNode;
-//             newNode->prev = prevNode;
-//         }
-//     }
-// }
+//to insert at any specified position
+void insertatpos(node* &head, node* &tail, int data, int pos){
+    if(pos == 0){
+        insertatbeg(head, tail, data);
+        return;
+    }
+    if(pos == findlength(head)-1){
+        insertatend(head, tail, data);
+        return;
+    }
+    else {
+        node* temp= head;
+        int count =0;
+        while(count<= pos){
+            if(count == pos-1){
+                break;
+            }
+            temp = temp->next;
+            count ++;
+        }
+        node* newnode = new node(data);
+        newnode->next = temp->next;
+        newnode->prev = temp;
+        temp->next = newnode;
+        return;
+        
+    }
+}
 
 
-//to insert a node in doubly linked list 
+//to delete a doubly ll from beginning 
+void deletefrombeg(node* &head, node* &tail){
+    if(head ==NULL){
+        return;
+    }
+    else if(head == tail){
+        node* temp = head;
+        head = tail = NULL;
+        delete temp;
+        return;
+    }
+
+    else{
+        node * temp = head;
+        head= head->next;
+        head->prev = NULL;
+        temp->next = NULL;
+        delete temp;
+        return;
+    }
+}
+
+//delete a node from the end
+void deletefromend(node* &head, node* &tail){
+    if(head == NULL){
+        return;
+    }
+    if(head == tail){
+        node* temp = head;
+        head = NULL;
+        tail = NULL;
+        delete temp;
+        return;
+    }
+
+    else {
+        node* temp = tail;
+        tail= tail->prev;
+        temp->prev = NULL;
+        tail->next = NULL;
+        delete temp;
+        return;
+    }
+}
+
+void deletefrompos(node* &head, node* &tail, int pos){
+    if(pos ==0){
+        deletefrombeg(head, tail);
+        return;
+    }
+    if(pos== findlength(head)-1){
+        deletefromend(head, tail);
+        return;
+    }
+    if(pos>findlength(head)-1){
+        return;
+    }
+
+    else{
+        int count =0;
+        node* temp = head;
+        while(count<= pos){
+            if(count == pos){
+                break;
+            }
+            temp = temp->next;
+            count++;
+        }
+        
+        temp->prev->next = temp->next;
+        temp->next->prev = temp->prev;
+        temp->prev = temp->next = NULL;
+        delete temp;
+        return;
+    }
+}
+
 int main(){
-    Node* first = new Node(10);
-    Node* second = new Node(20);
-    Node* third = new Node(30);
-    Node* head = first;
+    node* first = new node(30);
+    node* head = first;
+    node* tail = first;
 
-    first->next = second;
-    second->prev = first;
-    second->next = third;
-    third->prev = second;
-    Node* tail = third;
+    insertatbeg(head, tail, 20);
+    insertatbeg(head, tail, 10);
+    insertatbeg(head, tail, 0);
+    insertatend(head, tail, 40);
+    insertatend(head, tail, 50);
+    insertatend(head, tail, 60);
+    insertatpos(head, tail, 5, 1);
+    printll(head, tail);
 
-    insertAtHead(head, tail, 9);
-    insertAtHead(head, tail, 8);
-    insertAtHead(head, tail, 7);
 
-    insertAtTail(head, tail, 40);
-    insertAtTail(head, tail, 50);
-    printLL(head, tail);
+    cout<<endl;
+
+
+    deletefrombeg(head, tail);
+    deletefromend(head, tail);
+    deletefrompos(head, tail, 8);
+    printll(head, tail);
+
+
 }
