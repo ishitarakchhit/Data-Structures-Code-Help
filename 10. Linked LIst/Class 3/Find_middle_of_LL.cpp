@@ -26,6 +26,7 @@ int findlength(node* &head){
     return length;
 }
 
+//Approach1: to find the length of linked list and then find the node present at n/2th or n/2+1 th position
 int findmiddle(node* &head){
     int length = findlength(head);
     if(length%2 == 0){
@@ -48,6 +49,7 @@ int findmiddle(node* &head){
 }
 
 // Approach2: find middle of linked list using tortoise approach/2 pointer/slow fast appraoch
+//slow is incremented by 1 and fast is increemnted by 2 until fast does not reach the end. slow finally points to middle of linked list
 void findmiddle2(node* head){
     if(head ==NULL){
         cout<<"LL is empty";
