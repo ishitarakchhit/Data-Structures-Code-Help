@@ -38,7 +38,7 @@ void printll(node* &head){
 
 //function to find the middle node of given linked list
 node* middleofLL(node* &head){
-    cout<<"in middle"<<endl;
+ 
     node* slow = head;
     node* fast = head->next;
 
@@ -58,7 +58,7 @@ node* middleofLL(node* &head){
 
 //function to reverse the linked list from middle node
 node* reversefrommiddle(node* &head){
-    cout<<"in revmiddle"<<endl;
+ 
     node* prev = NULL;
     node* curr = middleofLL(head);
     node* forward;
@@ -78,7 +78,7 @@ node* reversefrommiddle(node* &head){
 
 //function to check whether the given LL is a pallindrome or not
 bool checkpallindrome(node* &head){
-    cout<<"in checkpallindrome"<<endl;
+
     if(head == NULL){
         return false;
     }
@@ -116,6 +116,5 @@ int main(){
 
     printll(head);
 
-    cout<<"in main";
     cout<<endl<<checkpallindrome(head);
 }
