@@ -53,6 +53,10 @@ int getLength(node* &head){
 //function to return the intersection of LL
 //Approach1: first we find the difference in length of both LLs. Then travel the bigger LL by their length difference. Then both are traversed at the same time and whenever node becomes equal the function returns it
 node* intersection(node* head1, node* head2){
+    if(head1->next == NULL && head2->next == NULL && head1!=head2){
+        return NULL;
+    }
+
     int len1 = getLength(head1);
     int len2 = getLength(head2);
     int travel = abs(len1 - len2);
