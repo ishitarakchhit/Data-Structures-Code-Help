@@ -68,4 +68,6 @@ int main(){
     s.push2(100);
     s.push2(90);
     s.push1(40);
+
+    return 0;
 }

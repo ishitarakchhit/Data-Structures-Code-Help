@@ -208,7 +208,7 @@ int main()
     deletefrombeg(head);
     deletefromend(head, tail);
     deletefrompos(head, tail, 1);
-    deletevalue(head, tail, 30);
+    
     cout << endl;
     printll(head);
 }
