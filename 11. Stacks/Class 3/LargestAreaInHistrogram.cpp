@@ -70,6 +70,7 @@ vector<int> nextSmallerElement(vector<int> &arr){
 
 
 //function to find the max area and return answer
+//traversing the array of histrogram and extending the line towards left and right and then calculating the area the falls between using width and then finding the area
 int findmaxarea(vector<int> &arr){
     int maxarea=INT_MIN;
     vector<int> prev = prevSmallerElement(arr);
