@@ -35,7 +35,7 @@ void printarr(vector<int> arr){
     
 }
 int main(){
-    vector<int> arr = {2,1,4,5,1,3};
+    vector<int> arr = {4,6,5, 1,4,5,1,3};
 
     vector<int> ans(arr.size());
     stack<int> s;
