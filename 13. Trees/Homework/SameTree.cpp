@@ -28,3 +28,22 @@ The number of nodes in both trees is in the range [0, 100].
 -104 <= Node.val <= 104
 */
 
+//function to check symmetry for two trees
+    bool isSame(TreeNode* p, TreeNode* q){
+        if((p == NULL && q!= NULL) || ( p!= NULL && q == NULL))
+            return false;
+
+        else if(q== NULL && p== NULL)
+            return true;
+            
+        else if(p->val != q->val)
+            return false;
+        //when data of both node are equal check for further nodes
+        else{
+            bool leftAns = isSame(p->left, q->right);
+            bool rightAns = isSame(p->right, q->left);
+            //if left part is symmetric but right part isn't so return false same for right and left
+            return leftAns & rightAns;
+        }
+    }
+

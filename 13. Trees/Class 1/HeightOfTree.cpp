@@ -23,13 +23,13 @@ The number of nodes in the tree is in the range [0, 104].
 */
 
 
-int func(TreeNode* root){
+int maxDepth(TreeNode* root){
         if(root == NULL)
             return 0;
         
         //to calculate the height of left and right nodes
-        int leftheight = func(root->left);
-        int rightheight = func(root->right);
+        int leftheight = maxDepth(root->left);
+        int rightheight = maxDepth(root->right);
 
         //to calculate the max depth + 1(to consider the current node)
         int ans = max(leftheight, rightheight) + 1;
