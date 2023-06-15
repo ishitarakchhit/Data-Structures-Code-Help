@@ -26,6 +26,7 @@ The number of nodes in the tree is in the range [1, 104].
 */
 
 class Solution {
+    //Function to find the maximum depth of binary tree
     int maxDepth(TreeNode* root){
         if(root == NULL)
             return 0;
@@ -43,11 +44,17 @@ public:
     int diameterOfBinaryTree(TreeNode* root) {
         if(root == NULL)
             return 0;
-        
-        int op1 = diameterOfBinaryTree(root->left);
-        int op2 = diameterOfBinaryTree(root->right);
-        int op3 = maxDepth(root->left) + maxDepth(root->right);
 
-        return max(op1, max(op2, op3));
+        else{
+        //considering case when maxdia exsists in left or right part which is not passing through the root node
+        int option1 = diameterOfBinaryTree(root->left);
+        int option2 = diameterOfBinaryTree(root->right);
+
+        //considering the case when diameter is max depth of left and right and passes through root node
+        int option3 = maxDepth(root->left) + maxDepth(root->right);
+
+        //returns the maximum of all diameters
+        return max(option1, max(option2, option3));
+        }
     }
 };
