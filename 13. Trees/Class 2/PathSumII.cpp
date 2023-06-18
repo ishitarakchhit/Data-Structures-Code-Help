@@ -33,32 +33,39 @@ The number of nodes in the tree is in the range [0, 5000].
 
 
 class Solution {
+    //function to check whether the path is equal to target sum or not 
     bool checkSum(vector<int> path, int targetSum){
         int sum =0;
+
         for(int i=0; i<path.size(); i++){
             sum = sum+path[i];
         }
+        
         return sum == targetSum;
     }
 
+    //function to find path sum 
     void solve(TreeNode* root, int targetSum, vector<vector<int>> &ans, vector<int> &path){
+        //Base Case
         if(root == NULL){
-            
             return;
         }
 
+        //to push root value into path array
         path.push_back(root->val);
-        if(root->left == NULL && root->right == NULL && checkSum(path, targetSum)){
-        ans.push_back(path);
-    }
+
+        //if the current node is a leaf node and sum is equal to target sum then push path into ans array
+        if(root->left == NULL && root->right == NULL && checkSum(path, targetSum))
+            ans.push_back(path);
+    
+        //R.C.
         solve(root->left, targetSum, ans, path);
-            solve(root->right, targetSum, ans, path);
-            path.pop_back();
+        solve(root->right, targetSum, ans, path);
+        //Backtrack
+        path.pop_back();
         
-            
-
-
     }
+
 public:
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
         vector<vector<int>> ans;
