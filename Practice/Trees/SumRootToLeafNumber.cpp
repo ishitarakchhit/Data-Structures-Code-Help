@@ -40,18 +40,23 @@ The depth of the tree will not exceed 10.
 */
 
 void solve(TreeNode* root, int &path, int &ans){
+        //Base Case
         if(root==NULL){
             return;
         }
 
+        //modifying path variable 
         path = path*10 + root->val;
 
+        //to check if current node is leaf node or not- if it is then add path to ans variable 
         if(root->left == NULL && root->right == NULL){
             ans += path;
         }
 
+        //RC
         solve(root->left, path, ans);
         solve(root->right, path,ans);
+        //Backtracking 
         path/=10;
     }
     int sumNumbers(TreeNode* root) {
