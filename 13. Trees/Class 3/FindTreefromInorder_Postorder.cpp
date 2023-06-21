@@ -27,16 +27,16 @@ int findPosition(int inorder[], int size, int element){
 
 
 //function to construct a tree when inorder and preorder traversals are given
-node* findTree(int inorder[], int preorder[], int size, int &preIndex, int starIndex, int endIndex){
-    if(preIndex>=size || starIndex> endIndex)
+node* findTree(int inorder[], int postorder[], int size, int &postIndex, int starIndex, int endIndex){
+    if(postIndex<0 || starIndex> endIndex)
         return NULL;
 
-    int element = preorder[preIndex++];
+    int element = postorder[postIndex--];
     node* root = new node(element);
     int pos = findPosition(inorder, size, element);
 
-    root->left = findTree(inorder, preorder, size, preIndex, starIndex, pos-1);
-    root->right = findTree(inorder, preorder, size, preIndex, pos+1, endIndex);
+    root->right = findTree(inorder, postorder, size, postIndex, pos+1, endIndex);
+    root->left = findTree(inorder, postorder, size, postIndex, starIndex, pos-1);
 
 }
 
@@ -74,14 +74,14 @@ void levelOrderTraversal(node* root){
 
 
 int main(){
-    int inorder[] = {40, 20, 50, 10, 60, 30, 70};
-    int preorder[] = {10, 20, 40, 50, 30, 60, 70};
-    int size = 7;
-    int preIndex = 0;
+    int inorder[] = {40, 20, 10, 50, 30, 60};
+    int postorder[] = {40, 20, 50, 60, 30, 10};
+    int size = 6;
+    int postIndex = size-1;
     int startIndex = 0;
     int endIndex = size-1;
 
-    node* root = findTree(inorder, preorder, size, preIndex, startIndex, endIndex);
+    node* root = findTree(inorder, postorder, size, postIndex, startIndex, endIndex);
 
     cout<<"Level Order Traversal is: \n";
     levelOrderTraversal(root);
