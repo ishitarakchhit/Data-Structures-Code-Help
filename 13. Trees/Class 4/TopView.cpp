@@ -1,5 +1,6 @@
 #include<iostream>
 #include<queue>
+#include<map>
 using namespace std;
 
 //class to define a Node
@@ -46,6 +47,8 @@ void topView(Node* root){
     while(!q.empty()){
         Node* temp = q.front().first;
         int distance = q.front().second;
+        //cout<<temp->data;
+        q.pop();
 
         if(topnode.find(distance) == topnode.end())
             topnode[distance] = temp->data;
@@ -58,12 +61,16 @@ void topView(Node* root){
         
     }
 
-    auto(i: topnode){
-        cout<<
+    for(auto i: topnode){
+        cout<<i.first<<" -> "<<i.second<<endl;
     }
 }
 
 
 int main(){
-    buildTree();
+    Node* root = buildTree();
+
+    topView(root);
+
+    return 0;
 }
