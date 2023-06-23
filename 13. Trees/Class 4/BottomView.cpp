@@ -50,7 +50,7 @@ void topView(Node* root){
         //cout<<temp->data;
         q.pop();
 
-        if(topnode.find(distance) == topnode.end())
+        //if(topnode.find(distance) == topnode.end())
             topnode[distance] = temp->data;
         
         if(temp->left)
