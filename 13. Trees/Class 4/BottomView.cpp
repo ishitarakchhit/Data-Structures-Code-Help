@@ -49,9 +49,8 @@ void topView(Node* root){
         int distance = q.front().second;
         //cout<<temp->data;
         q.pop();
-
-        //if(topnode.find(distance) == topnode.end())
-            topnode[distance] = temp->data;
+        
+        topnode[distance] = temp->data;
         
         if(temp->left)
             q.push(make_pair(temp->left, distance-1));
