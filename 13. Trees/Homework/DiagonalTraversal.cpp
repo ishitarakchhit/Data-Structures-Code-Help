@@ -30,3 +30,42 @@ Constraints:
 1 <= Number of nodes<= 105
 1 <= Data of a node<= 105
 */
+
+//Approach 1: using map
+void solve(Node* root, map<int, vector<int>> &mp, int distance){
+    if(root == NULL)
+        return;
+    
+    mp[distance].push_back(root->data);
+    //to call the left subtree
+    solve(root->left, mp, distance+1);
+    solve(root->right, mp, distance);
+}
+
+vector<int> diagonal(Node *root)
+{
+   // your code here
+   map<int, vector<int>> mp;
+   int distance = 0;
+   //mp[distance].push_back(root->data);
+   
+   solve(root, mp, distance);
+   vector<int> ans;
+   
+    for (auto it = mp.begin(); it != mp.end(); ++it) {
+        for (int i = 0; i < it->second.size(); ++i) {
+            ans.push_back(it->second[i]);
+        }
+    }
+   return ans;
+}
+
+
+
+
+
+
+
+
+
+//Approach 2: using stack and level order traversal
