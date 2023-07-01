@@ -37,6 +37,8 @@ int count = 0;
         solve(root->right, targetSum-root->val);
 
     }
+
+    
     int pathSum(TreeNode* root, long long targetSum) {
         if(root){
             solve(root, targetSum);
@@ -45,4 +47,4 @@ int count = 0;
         }
         
         return count;
-    }
+    }g
