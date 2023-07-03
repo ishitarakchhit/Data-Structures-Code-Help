@@ -47,7 +47,36 @@ Constraints:
 
 
 //Apprach: similar to diameter of tree where we find height and return the max sum left and right subtree
-
+pair<int, int> solve(Node* root){
+        
+        if(root == NULL)
+            return {0,0};
+        
+        
+        auto left = solve(root->left);
+        auto right = solve(root->right);
+        
+        // make pair with larger height
+        if(left.first > right.first)
+            return { left.first+1, left.second + root->data };
+        
+        //make pair with larget height
+        else if(left.first <right.first)
+            return { right.first+1, right.second + root->data };
+        
+        //if both are same make pair with larger sum
+        else
+            return { left.first+1, max(left.second, right.second) + root->data };
+    }
+        
+        
+    
+    int sumOfLongRootToLeafPath(Node *root)
+    {
+        //code here
+        auto ans = solve(root);
+        return ans.second;
+    }
 
 
 
