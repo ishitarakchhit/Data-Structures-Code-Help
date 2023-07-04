@@ -75,8 +75,10 @@ void levelOrderTraversal(Node* root){
     return;
 }
 
+//pre post and inorder traversal remains same as tree 
 
-// to search for a node in the tree
+
+//to search for a node in BST and returns it
 Node* searchBST(Node* root, int val){
     if(root == NULL){
         return NULL;
@@ -93,23 +95,62 @@ Node* searchBST(Node* root, int val){
 }
 
 
-int findPredHelper(Node* root, int val, int &pred){
-    if(root == NULL)
-        return 0;
+//function to find minimum value of BST 
+int minVal(Node* root){
     
-    pred = max(root->data, max(findPredHelper(root->left, val, pred), findPredHelper(root->right, val, pred)));
-    
+    while(root->left){
+        root = root->left;
+    }
+    return root->data;
+}
 
-    return pred;
+//function to find maximum value node of BST
+Node* maxVal(Node* root){
+    while(root->right){
+        root = root->right;
+    }
+    return root;
+}
+
+Node* deleteInBST(Node* root, int key){
+    if(root == NULL){
+        return NULL;
+    }
+
+    if(root->data == key){
+        //perfrom the 4 cases
+
+        if(root->left == NULL && root->right == NULL){
+            delete root;
+            return NULL;
+        }
+        else if(root->left == NULL && root->right){
+            Node* child = root->right;
+            return child;
+        }
+        else if(root->left && root->right == NULL){
+            Node* child = root->left;
+            return child;
+        }
+        else{
+            Node* child = maxVal(root->left);
+            root->data = child->data;
+            root->left = deleteInBST(root->left, child->data);
+            return root;
+        }
+    }
+
+    else if(root->data > key){
+        root->left = deleteInBST(root->left, key);
+    }
+    else{
+        root->right = deleteInBST(root->right, key);
+    }
 }
 
 
-int findPred(Node* root, int val){
-    if(root == NULL)
-        return 0;
-    int pred = 0;
-    return findPredHelper( searchBST(root, val)->left, val, pred);
-}
+
+
 
 //main function
 int main(){
@@ -119,11 +160,14 @@ int main(){
     takeInput(root);
 
     cout<<"Printing the Tree:\n";
-    levelOrderTraversal(root);
+    levelOrderTraversal(root);                   // to print level order traversal  of BST
 
-    cout<<"Enter the value for which pred and succ are to be searched: ";
+    cout<<"Enter the node to be deleted: ";
     cin>>val;
-    cout<<findPred(root, val);
-    
-    //cout<<findSucc(root->right, val);
+    deleteInBST(root, val);                      // to delete a node in BST
+
+    cout<<"Printing the new Tree:\n";
+    levelOrderTraversal(root);                   // to print level order traversal of BST
+
+    return 0;
 }
