@@ -116,7 +116,7 @@ void printDLL(Node* root){
 
 //function to convert doubly linked list to binary search tree
 Node* DLLtoBST( Node* &head, int n){
-    if(n <=0 || head == NULL)
+    if(n <=0 || head == NULL) 
         return NULL;
     
     Node* leftsubtree = DLLtoBST(head, n -1 -n/2);
