@@ -11,7 +11,7 @@ class Heap{
     Heap(int totalsize){
         this->totalsize = totalsize;
         this->size = 0;
-        arr = new int[totalsize];
+        arr = new int[totalsize+1];
         arr[0] = -1;
     }
 
@@ -57,32 +57,42 @@ int Heap:: deleteHeap(){
 
     arr[1] = arr[size--];
     int index = 1;
-    while(index < size){
+    while(index <= size){
+
         int left = index*2;
         int right = index*2 +1;
         int largest = index;
 
-        if(left<size && arr[left] > arr[index]){
+        if(left<=size && arr[left] > arr[largest])   
             largest = left;
+        
+        if(right<= size && arr[right] > arr[largest])  
+            largest = right;
+
+        if(largest == index)   
+            return data;
+
+        else{
+            swap(arr[largest], arr[index]);
+            index = largest;
         }
-        if(right<size && arr[right] > arr[right])
-
-
     } 
 
     return data;
-
 }
 
 //main function
 int main(){
     Heap* h = new Heap(10);
-    h->insert(10);
-    h->insert(20);
-    h->insert(30);
-    h->insert(40);
+    h->insert(100);
     h->insert(50);
+    h->insert(60);
+    h->insert(40);
+    h->insert(45);
+    h->insert(53);
+    h->insert(52);
     h->printHeap();
+    cout<<"size"<<h->size;
     cout<<"Deleted value: "<<h->deleteHeap();
     h->printHeap();
 }
