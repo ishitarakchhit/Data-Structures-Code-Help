@@ -1,6 +1,6 @@
+#include<queue>
 #include<iostream>
 using namespace std;
-
 void heapify(int arr[], int &index, int size){
 
     int largest = index;
@@ -28,27 +28,23 @@ void buildHeap(int arr[], int n){
 }
 
 
-void heapSort(int arr[], int n){
-    while(n>1){
-        swap(arr[1], arr[n--]);
-        int index = 1;
-        heapify(arr, index, n);
+void mergeHeaps(int arr1[], int arr2[], int size1, int size2){
+    int k = 1;
+    for(int i = size1; i<=size1+size2; i++){
+        arr1[i] = arr2[k++];
     }
+    buildHeap(arr1, size1+size2);
+    for(int i =0; i<=size1+size2; i++)
+        cout<<arr1[i]<<" ";
+    return;
 }
-int main(){
 
-    int arr[] = {-1, 12, 15, 13, 11, 14};
-    int n = 5;
-    buildHeap(arr, n);
-    for (int i = 1; i <=n; i++)
-    {
-        cout<<arr[i]<<" ";
-    }
-    cout<<endl;
-    heapSort(arr, n );
-    for (int i = 1; i <=n; i++)
-    {
-        cout<<arr[i]<<" ";
-    }
+int main(){
+    int arr1[] = {-1,1,2,3,4,5,6};
+    int arr2[] = {-1,7,8,9,10};
+    int size1 = 6;
+    int size2 =4;
+    mergeHeaps(arr1, arr2, size1, size2);
     
+
 }
