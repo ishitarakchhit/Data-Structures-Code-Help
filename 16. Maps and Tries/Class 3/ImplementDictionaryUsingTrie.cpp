@@ -46,25 +46,16 @@ void insertWord(TrieNode* root, string word){
 
 
 //function to get all words after the current character
-void getWord(TrieNode* root, vector<string> &line, string& word, bool &wordend){
+void getWord(TrieNode* root, vector<string> &line, string& word){
     if(root->isTerminal){             //when the current character is the last character of the word then push it into the ans string
-        line.push_back(word);
-        int flag = false;
-        for(int i=0; i<26; i++){
-            if(root->children[i]){
-                flag = true;
-                wordend= true;
-            }
-        }
-        if(flag)
-            return;
+        line.push_back(word);         //---!mistake: added return satemnet in base case which prevented all words to be stored
     }  
 
     for(int i=0; i<26; i++){
         if(root->children[i]){
             
             word.push_back(root->children[i]->data);
-            getWord(root->children[i], line, word, wordend);
+            getWord(root->children[i], line, word);
             word.pop_back();
         }
     }
