@@ -36,3 +36,45 @@ int main(){
 
     rec(arr, 0, arr.size()-1);
 }
+
+
+//--------OR------------
+
+/*
+#include<iostream>
+#include<vector>
+using namespace std;
+
+void rec(vector<int> arr, int i, vector<int> &ans , vector<vector<int>> &output){
+    if(i == arr.size()){
+        return;
+    }
+    
+    for(int j=i; j<arr.size(); j++){
+        ans.push_back(arr[j]);
+        output.push_back(ans);
+    }
+    ans = {};
+    rec(arr, i+1, ans, output);
+    return;
+}
+
+int main(){
+    vector<int> arr= {1,2,3,4,5};
+    vector<int> ans;
+    vector<vector<int>> output;
+    rec(arr,0,  ans, output);
+
+    for (int i = 0; i < output.size(); i++)
+    {
+        for (int j = 0; j < output[i].size(); j++)
+        {
+            cout<<output[i][j]<<" ";
+        }
+        cout<<endl;
+        
+    }
+    
+} 
+
+*/
