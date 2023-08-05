@@ -35,7 +35,7 @@ void rec(string& a, string& b, string& c, int i, int j, int ans, int carry){
 
 int main(){
     string a= "1234";
-    string b= "1244";
+    string b= "9284";
     string c="";
     //cout<<(a[3]-'0' + b[3]-'0' +0);
 
