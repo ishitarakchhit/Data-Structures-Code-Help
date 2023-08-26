@@ -44,3 +44,44 @@ int minSubsetSumDifference(vector<int>& arr, int n)
 
 
 
+int minSubsetSumDifference(vector<int>& arr, int n)
+{
+	int k = 0;
+        for(auto i:arr) k+= i;
+	
+	vector<bool> curr(k+1, false);
+	vector<bool> prev(k+1, false);
+
+        //setting the base cases
+        //when target == 0 every index of array will return true
+        prev[0]=true;
+         
+        //when we are at 0th index and target == arr[0] return true;
+        if(arr[0] <= k)
+            prev[arr[0]] = true;
+        
+
+        //run loops
+        for(int i=1; i<n; i++){
+            for(int j=1; j<=k; j++){
+                bool notpick = prev[j];
+                bool pick = false;
+                if(arr[i] <= j)
+                    pick = prev[j-arr[i]];
+
+                curr[j] = pick | notpick;
+
+            }
+            prev = curr;
+			
+        }
+        
+        //now try finding min difference subsets
+        int ans = INT_MAX;
+        for(int target=0; target<=k; target++){
+            if(curr[target] == true)
+                ans = min(ans, abs(target- k+target));
+        }
+        return ans;
+
+}
