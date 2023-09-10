@@ -11,5 +11,21 @@
         "regex": "cpp",
         "utility": "cpp",
         "valarray": "cpp"
-    }
+    },
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "MyFirstSQLConnection",
+            "database": "MainDB",
+            "username": "admin",
+            "password": "YES"
+        }
+    ]
 }
