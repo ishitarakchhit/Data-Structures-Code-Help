@@ -49,7 +49,8 @@ grid[i][j] is 0, 1, or 2.
 int orangesRotting(vector<vector<int>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
-
+        int currFresh = 0;
+        int totFresh = 0;
         queue <pair<pair<int,int>,int>> q;
         int ans = 0;                          //to push seconds in which oranges rot 
 
@@ -59,6 +60,7 @@ int orangesRotting(vector<vector<int>>& grid) {
                 if(grid[i][j] == 2){
                     q.push({{i,j},0});
                 }
+                if(grid[i][j] == 1) totFresh ++;
             }
         }
 
@@ -76,6 +78,7 @@ int orangesRotting(vector<vector<int>>& grid) {
                     if(abs(dx) != abs(dy)){
                         if(row+dx >=0 && row+dx <n && col+dy >=0 && col+dy <m){
                             if(grid[row+dx][col+dy] == 1){
+                                currFresh++;
                                 q.push({{row+dx, col+dy}, sec+1});
                                 grid[row+dx][col+dy] = 2;
                             }
@@ -86,13 +89,8 @@ int orangesRotting(vector<vector<int>>& grid) {
         }
 
         //checking for any availabel fresh oranges
-        for(int i=0; i<n; i++){
-            for(int j=0;j<m; j++){
-                if(grid[i][j] == 1) return -1;
-            }
-        }
-        
+        if(totFresh != currFresh) return -1;
+
         return ans;
 
     }
-};
