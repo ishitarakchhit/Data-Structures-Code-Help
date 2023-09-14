@@ -39,36 +39,24 @@ Constraints:
 */
 
 
-    
-
-
-bool bfs(int V, vector<int> adj[], vector<bool> &vis){
-        //forming a queue to store current vertex and the vertex it has just come from
-        queue<pair<int,int>> q;
+    bool dfs(int V, int prev, vector<int> adj[], vector<bool> &vis){
         
-        q.push({V, -1});
         vis[V] = 1;
-        
-        while(!q.empty()){
-            auto front = q.front();
-            q.pop();
-            int curr = front.first;
-            int prev = front.second;
-            
-            for(auto &x:adj[curr]){
+            for(auto &x:adj[V]){
                 if(vis[x] != 1){
-                    q.push({x,curr});
-                    vis[x] = 1;
+                    if(dfs(x, V, adj, vis)== true) return true;
                 }
                 else{
                     if(x!= prev) return true;
                 }
                 
             }
-        }
+        
         return false;
     }
-  
+
+
+
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
         
